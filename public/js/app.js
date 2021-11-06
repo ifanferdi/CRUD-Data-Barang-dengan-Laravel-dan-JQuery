@@ -54,7 +54,6 @@ $(function () {
                 $('#formUbah button[type=submit]').html("Ubah");
             },
             success: function (data) {
-                console.log(data);
                 if (data.status == 0) {
                     $.each(data.error, function (prefix, val) {
                         $('#formUbah #' + prefix).addClass('is-invalid');

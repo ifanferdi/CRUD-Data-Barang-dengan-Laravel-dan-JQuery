@@ -142,17 +142,20 @@ class InventoryController extends Controller
                 'stok' => $request->stok,
             ];
 
-            if ($request->file('gambar')->store('img_barang')) {
+            if ($request->file('gambar')) {
                 if ($request->gambarLama) {
                     Storage::delete($request->gambarLama);
                 }
                 $request->file('gambar')->store('img_barang');
                 $data['gambar'] = $request->file('gambar')->store('img_barang');
+            } else {
+                $data['gambar'] = $request->gambarLama;
             }
 
             Inventory::where('id', $inventory->id)->update($data);
 
             return response()->json([
+                'data' => $data,
                 'status' => 1,
                 'sukses' => 'Data barang berhasil diubah!'
             ]);
