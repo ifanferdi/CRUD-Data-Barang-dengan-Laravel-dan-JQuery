@@ -9,7 +9,6 @@
                 @method('put')
                 @csrf
                 <div class="modal-body">
-
                     <div class="mb-3">
                         <label class="form-label" for="nama_barang">Nama Barang</label>
                         <input type="text" class="form-control" name="nama_barang" id="nama_barang"
@@ -42,12 +41,15 @@
                         <div class="invalid-feedback stok_error"></div>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="gambar">Gambar</label>
+                        <label class="form-label col-12" for="gambar">Gambar</label>
+                        <input type="hidden" name="gambarLama" id="gambarLama">
+                        <img src="" class="img-preview img-fluid col-sm-4">
                         <input class="form-control" type="file" name="gambar" id="gambar">
+                        <div class="invalid-feedback gambar_error"></div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                     <button type="submit" class="btn btn-success">Ubah</button>
                 </div>
             </form>

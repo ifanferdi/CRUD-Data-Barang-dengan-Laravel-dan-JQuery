@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Inventory;
 use Illuminate\Http\Request;
 use Validator;
+use Illuminate\Support\Facades\Storage;
 
 class InventoryController extends Controller
 {
@@ -116,7 +117,8 @@ class InventoryController extends Controller
             'nama_barang' => 'required|max:100',
             'harga_beli' => 'required|numeric',
             'harga_jual' => 'required|numeric',
-            'stok' => 'required|numeric'
+            'stok' => 'required|numeric',
+            'gambar' => 'image|file|max:100|mimes:jpg,png'
         ];
 
         if ($request->kode_barang != $inventory->kode_barang) {
@@ -137,8 +139,16 @@ class InventoryController extends Controller
                 'kode_barang' => $request->kode_barang,
                 'harga_beli' => $request->harga_beli,
                 'harga_jual' => $request->harga_jual,
-                'stok' => $request->stok
+                'stok' => $request->stok,
             ];
+
+            if ($request->file('gambar')->store('img_barang')) {
+                if ($request->gambarLama) {
+                    Storage::delete($request->gambarLama);
+                }
+                $request->file('gambar')->store('img_barang');
+                $data['gambar'] = $request->file('gambar')->store('img_barang');
+            }
 
             Inventory::where('id', $inventory->id)->update($data);
 
@@ -157,7 +167,7 @@ class InventoryController extends Controller
      */
     public function destroy(Inventory $inventory)
     {
-
+        Storage::delete($inventory->gambar);
         Inventory::destroy($inventory->id);
 
         return response()->json([
@@ -177,6 +187,22 @@ class InventoryController extends Controller
 
     public function getInventory()
     {
-        echo json_encode(Inventory::find($_POST['id']));
+        return response()->json([
+            Inventory::find($_POST['id'])
+        ]);
+    }
+
+    public function cari(Request $request)
+    {
+        $cari = '%' . $request->key . '%';
+
+        $inventories = Inventory::where('nama_barang', 'LIKE', $cari)
+            ->orWhere('kode_barang', 'LIKE', $cari)
+            ->orderBy('nama_barang', 'asc')
+            ->get();
+
+        return view('barang.data_barang')->with([
+            'inventories' => $inventories
+        ]);
     }
 }

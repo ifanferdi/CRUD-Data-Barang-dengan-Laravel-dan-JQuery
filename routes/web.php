@@ -18,7 +18,6 @@ Route::get('/', function () {
     return redirect(url('/barang'));
 });
 
-
 Route::get('/barang', [InventoryController::class, 'index']);
 Route::get('/barang/create', [InventoryController::class, 'create']);
 Route::post('/barang', [InventoryController::class, 'store']);
@@ -27,3 +26,4 @@ Route::put('/barang/{inventory}/edit', [InventoryController::class, 'update']);
 
 Route::get('/barang/tampilData', [InventoryController::class, 'tampilData']);
 Route::post('/barang/getInventory', [InventoryController::class, 'getInventory']);
+Route::get('/barang/cari', [InventoryController::class, 'cari']);
