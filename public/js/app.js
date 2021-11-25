@@ -35,7 +35,6 @@ $(function () {
 
     $('#formUbah').on('submit', function (e) {
         e.preventDefault();
-
         $.ajax({
             url: $(this).attr('action'),
             method: $(this).attr('method'),
@@ -111,8 +110,8 @@ $(function () {
             url: $(this).attr('action'),
             method: $(this).attr('method'),
             data: new FormData(this),
-            processData: false,
             dataType: 'json',
+            processData: false,
             contentType: false,
             beforeSend: function () {
                 $(document).find('#formTambah .invalid-feedback').html('');
@@ -162,22 +161,20 @@ function ubah(idBarang) {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         url: $(location).attr('href') + '/getInventory',
-        data: {
-            id: idBarang
-        },
+        data: "id=" + idBarang,
         method: 'post',
         dataType: 'json',
         success: function (data) {
             $('#modalUbah').modal('show');
             $('#modalUbah #gambar').val('')
             $('#modalUbah form').attr('action', $(location).attr('href') + '/' + idBarang + '/edit');
-            $('#modalUbah #nama_barang').val(data[0].nama_barang);
-            $('#modalUbah #kode_barang').val(data[0].kode_barang);
-            $('#modalUbah #harga_jual').val(data[0].harga_jual);
-            $('#modalUbah #harga_beli').val(data[0].harga_beli);
-            $('#modalUbah #stok').val(data[0].stok);
-            $('#modalUbah #gambarLama').val(data[0].gambar);
-            $('#modalUbah .img-preview').attr('src', 'http://localhost:8000/' + 'storage/' + data[0].gambar);
+            $('#modalUbah #nama_barang').val(data.nama_barang);
+            $('#modalUbah #kode_barang').val(data.kode_barang);
+            $('#modalUbah #harga_jual').val(data.harga_jual);
+            $('#modalUbah #harga_beli').val(data.harga_beli);
+            $('#modalUbah #stok').val(data.stok);
+            $('#modalUbah #gambarLama').val(data.gambar);
+            $('#modalUbah .img-preview').attr('src', 'http://localhost:8000/' + 'storage/' + data.gambar);
             $('#modalUbah .img-preview').addClass('mb-3');
         }
     });

@@ -188,11 +188,9 @@ class InventoryController extends Controller
         ]);
     }
 
-    public function getInventory()
+    public function getInventory(Request $request)
     {
-        return response()->json([
-            Inventory::find($_POST['id'])
-        ]);
+        return response()->json(Inventory::find($_POST['id']));
     }
 
     public function cari(Request $request)
