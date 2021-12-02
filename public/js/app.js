@@ -10,11 +10,11 @@ $(function () {
                 url: $(this).attr('action'),
                 data: "key=" + cari,
                 beforeSend: function () {
-                    $('#formCari button[type=submit]').attr('disable', 'disabled');
+                    $('#formCari button[type=submit]').attr('disabled', 'disabled');
                     $('#formCari button[type=submit]').html("<i class='fa fa-spin fa-spinner'></i>");
                 },
                 complete: function () {
-                    $('#formCari button[type=submit]').removeAttr('disable');
+                    $('#formCari button[type=submit]').removeAttr('disabled');
                     $('#formCari button[type=submit]').html("<i class='fas fa-search'></i>");
                 },
                 success: function (data) {
@@ -44,12 +44,12 @@ $(function () {
             contentType: false,
             beforeSend: function () {
                 $(document).find('#formUbah .invalid-feedback').html('');
-                $('#formUbah button[type=submit]').attr('disable', 'disabled');
+                $('#formUbah button[type=submit]').attr('disabled', 'disabled');
                 $('#formUbah .form-control').removeClass('is-invalid');
                 $('#formUbah button[type=submit]').html("<i class='fa fa-spin fa-spinner'></i>");
             },
             complete: function () {
-                $('#formUbah button[type=submit]').removeAttr('disable');
+                $('#formUbah button[type=submit]').removeAttr('disabled');
                 $('#formUbah button[type=submit]').html("Ubah");
             },
             success: function (data) {
@@ -88,11 +88,11 @@ $(function () {
             dataType: 'json',
             contentType: false,
             beforeSend: function () {
-                $('#formHapus button[type=submit]').attr('disable', 'disabled');
+                $('#formHapus button[type=submit]').attr('disabled', 'disabled');
                 $('#formHapus button[type=submit]').html("<i class='fa fa-spin fa-spinner'></i>");
             },
             complete: function () {
-                $('#formHapus button[type=submit]').removeAttr('disable');
+                $('#formHapus button[type=submit]').removeAttr('disabled');
                 $('#formHapus button[type=submit]').html("Hapus");
             },
             success: function (data) {
@@ -115,12 +115,12 @@ $(function () {
             contentType: false,
             beforeSend: function () {
                 $(document).find('#formTambah .invalid-feedback').html('');
-                $('#formTambah button[type=submit]').attr('disable', 'disabled');
+                $('#formTambah button[type=submit]').attr('disabled', 'disabled');
                 $('#formTambah .form-control').removeClass('is-invalid');
                 $('#formTambah button[type=submit]').html("<i class='fa fa-spin fa-spinner'></i>");
             },
             complete: function () {
-                $('#formTambah button[type=submit]').removeAttr('disable');
+                $('#formTambah button[type=submit]').removeAttr('disabled');
                 $('#formTambah button[type=submit]').html("Simpan");
             },
             success: function (data) {
